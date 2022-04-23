@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {todolist} from "./todolist.model";
+import { User } from "./user.model";
 import {DataService} from "./data.service";
 
 @Component({
@@ -8,14 +8,14 @@ import {DataService} from "./data.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  lists$!: todolist[];
+  user$!: User[];
 
   constructor(private dataService: DataService) {
   }
   ngOnInit() {
-    return this.dataService.getLists()
+    return this.dataService.getUser()
       .subscribe(data => {
-        this.lists$ = data;
+        this.user$ = data;
       });
   }
 }

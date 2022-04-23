@@ -1,4 +1,7 @@
-<div *ngFor='let list of lists$'>
-  <h2>{{list.name}}</h2>
-  <p *ngFor="let task of list.taskEntities">{{task.title}} - {{task.content}}</p>
+<div *ngFor="let user of user$">
+  <h2 *ngFor="let todolist of user.toDoListEntities">{{todolist.name}} <button>ADD TASK</button><button>ADDITIONAL BUTTON</button>
+    <p *ngFor="let task of todolist.taskEntities">{{task.content}} - {{task.title}} - {{task.status}}</p>
+  </h2>
+  <button>ADD LIST</button>
+<!--  <h3 *ngFor="let task of user.toDoListEntities[0].taskEntities">{{task.title}} - {{task.content}}</h3>-->
 </div>
