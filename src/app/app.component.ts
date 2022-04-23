@@ -18,4 +18,9 @@ export class AppComponent implements OnInit{
         this.user$ = data;
       });
   }
+
+  p1:boolean = false;
+  hideFunction(){
+    this.p1 = !this.p1;
+  }
 }
