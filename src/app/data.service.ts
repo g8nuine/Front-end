@@ -23,4 +23,7 @@ export class DataService {
     console.log(data)
     });
   }
+  PostStatus(response: any) {
+    //TODO
+  }
 }

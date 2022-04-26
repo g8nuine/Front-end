@@ -13,11 +13,6 @@ export class AppComponent implements OnInit{
   constructor(private dataService: DataService, private changeDetection: ChangeDetectorRef) {}
 
   ngOnInit() {
-     // this.dataService.getUser()
-     //  .subscribe(data => {
-     //    this.user$ = data;
-     //    this.changeDetection.detectChanges();
-     //  });
     this.RefreshUsers();
   }
 
@@ -37,16 +32,43 @@ export class AppComponent implements OnInit{
     (document.getElementById('popup1') as HTMLFormElement).classList.toggle("active");
   }
 
-  Addlist() {
+  togglePopup2() {
+    (document.getElementById('popup2') as HTMLFormElement).classList.toggle("active");
+  }
+
+  togglePopup3() {
+    (document.getElementById('popup3') as HTMLFormElement).classList.toggle("active");
+  }
+
+  AddList() {
     const {value: data} = (document.getElementById("listInput") as HTMLFormElement)
     this.dataService.PostList(data);
     location.reload();
   }
+
+  AddTask() {
+    //TODO
+  }
+
+  AddUser() {
+    //TODO
+  }
+
   RefreshUsers() {
     this.dataService.getUser()
       .subscribe(data => {
         this.user$ = data;
         this.changeDetection.detectChanges();
       });
+  }
+  CheckStatus(status: boolean) {
+    return {
+      'checked': status,
+      '': !status
+    }
+  }
+  Check(title: any) {
+    const {value: data} = (document.getElementById("" + title) as HTMLFormElement)
+    this.dataService.PostStatus(data);
   }
 }

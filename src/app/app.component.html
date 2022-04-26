@@ -15,7 +15,26 @@
     <div class="close-btn" (click)="togglePopup1()">&times;</div>
     <h1>Add List</h1>
     <input id="listInput" type="text" placeholder="Name"><br><br>
-    <button type="button" class="btn btn-primary" style="width: 200px" (click)="Addlist()">Submit</button>
+    <button type="button" class="btn btn-primary" style="width: 200px" (click)="AddList()">Submit</button>
+  </div>
+</div>
+<div class="popup" id="popup2">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" (click)="togglePopup2()">&times;</div>
+    <h1>Add List</h1>
+    <input id="taskInputTitle" type="text" placeholder="Title"><br>
+    <input id="taskInputContent" type="text" placeholder="Content"><br><br>
+    <button type="button" class="btn btn-primary" style="width: 200px" (click)="AddTask()">Submit</button>
+  </div>
+</div>
+<div class="popup" id="popup3">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" (click)="togglePopup3()">&times;</div>
+    <h1>Add List</h1>
+    <input id="userName" type="text" placeholder="UserName"><br><br>
+    <button type="button" class="btn btn-primary" style="width: 200px" (click)="AddUser()">Submit</button>
   </div>
 </div>
 <header>
@@ -43,9 +62,12 @@
   <div class="container">
     <div >
       <div class="userList" *ngFor="let user of user$">
-        <h2 class="bg-light p5 rounded" *ngFor="let todolist of user.toDoListEntities">{{todolist.name}}<button type="button" class="btn btn-dark" style="margin-left: 15px" (click)="hideFunction(todolist.name)">SHOW TASKS</button><button style="margin-left: 10px" type="button" class="btn btn-success">ADD TASK</button><button style="margin-left: 10px" type="button" class="btn btn-info">ADD USER</button>
+        <h2 class="bg-light p5 rounded" *ngFor="let todolist of user.toDoListEntities">{{todolist.name}}
+          <button type="button" class="btn btn-dark" style="margin-left: 15px" (click)="hideFunction(todolist.name)">SHOW TASKS</button>
+          <button style="margin-left: 10px" type="button" class="btn btn-success" (click)="togglePopup2()">ADD TASK</button>
+          <button style="margin-left: 10px" type="button" class="btn btn-info" (click)="togglePopup3()">ADD USER</button>
           <div class="{{todolist.name}}" style="display: none">
-            <p *ngFor="let task of todolist.taskEntities">{{task.content}} - {{task.title}} - {{task.status}}</p>
+            <p *ngFor="let task of todolist.taskEntities">{{task.title}} - {{task.content}} <input class="form-check-input" type="checkbox" value="" id="{{task.title}}" [ngClass]="CheckStatus(task.status)" (click)="Check(task.title)"></p>
           </div>
           <br>
         </h2>
