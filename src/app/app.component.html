@@ -1,4 +1,3 @@
-
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,20 +7,6 @@
   <title>Carousel Template · Bootstrap v5.1</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
 
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
 </head>
 <body>
 <header>
@@ -49,21 +34,20 @@
   <div class="container">
     <div >
       <div  *ngFor="let user of user$">
-        <h2 class="bg-light p5 rounded" *ngFor="let todolist of user.toDoListEntities">{{todolist.name}}<button type="button" class="btn btn-dark" style="margin-left: 15px" (click)="hideFunction()">SHOW TASKS</button> <button style="margin-left: 10px" type="button" class="btn btn-success">ADD TASK</button><button style="margin-left: 10px" type="button" class="btn btn-info">ADD USER</button>
-          <div *ngIf="p1">
+        <h2 class="bg-light p5 rounded" *ngFor="let todolist of user.toDoListEntities">{{todolist.name}}<button type="button" class="btn btn-dark" style="margin-left: 15px" (click)="hideFunction(todolist.name)">SHOW TASKS</button><button style="margin-left: 10px" type="button" class="btn btn-success">ADD TASK</button><button style="margin-left: 10px" type="button" class="btn btn-info">ADD USER</button>
+          <div class="{{todolist.name}}" style="display: none">
             <p *ngFor="let task of todolist.taskEntities">{{task.content}} - {{task.title}} - {{task.status}}</p>
-
           </div>
           <br>
         </h2>
-        <button>ADD LIST</button>
+        <div class="text-center"><button type="button" class="btn btn-primary" style="width: 200px" (click)="openDialog()">ADD LIST</button></div>
         <!--  <h3 *ngFor="let task of user.toDoListEntities[0].taskEntities">{{task.title}} - {{task.content}}</h3>-->
       </div>
     </div>
     <hr class="featurette-divider">
   </div>
   <footer class="container">
-    <p class="float-end"><a href="#">Back to top</a></p>
+<!--    <p class="float-end"><a href="#">Back to top</a></p>-->
   </footer>
 </main>
 </body></html>

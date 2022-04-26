@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from "./user.model";
+import { Component, OnInit, Input } from '@angular/core';
+import {todolist, User} from "./user.model";
 import {DataService} from "./data.service";
+
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,20 @@ export class AppComponent implements OnInit{
       });
   }
 
-  p1:boolean = false;
-  hideFunction(){
-    this.p1 = !this.p1;
+  name:boolean = false;
+
+  hideFunction(todolistname: {}){
+      const slides = document.getElementsByClassName(''+todolistname);
+
+      for (let i = 0; i < slides.length; i++) {
+        const slide = slides[i] as HTMLElement;
+        if(slide.style.display == "none") {
+          slide.style.display = "block";
+        } else {
+          slide.style.display = "none";
+        }
+      }
+    this.name = !this.name;
   }
+
 }
