@@ -9,6 +9,15 @@
 
 </head>
 <body>
+<div class="popup" id="popup1">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="close-btn" (click)="togglePopup1()">&times;</div>
+    <h1>Add List</h1>
+    <input id="listInput" type="text" placeholder="Name"><br><br>
+    <button type="button" class="btn btn-primary" style="width: 200px" (click)="Addlist()">Submit</button>
+  </div>
+</div>
 <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
@@ -33,21 +42,19 @@
 <main>
   <div class="container">
     <div >
-      <div  *ngFor="let user of user$">
+      <div class="userList" *ngFor="let user of user$">
         <h2 class="bg-light p5 rounded" *ngFor="let todolist of user.toDoListEntities">{{todolist.name}}<button type="button" class="btn btn-dark" style="margin-left: 15px" (click)="hideFunction(todolist.name)">SHOW TASKS</button><button style="margin-left: 10px" type="button" class="btn btn-success">ADD TASK</button><button style="margin-left: 10px" type="button" class="btn btn-info">ADD USER</button>
           <div class="{{todolist.name}}" style="display: none">
             <p *ngFor="let task of todolist.taskEntities">{{task.content}} - {{task.title}} - {{task.status}}</p>
           </div>
           <br>
         </h2>
-        <div class="text-center"><button type="button" class="btn btn-primary" style="width: 200px" (click)="openDialog()">ADD LIST</button></div>
-        <!--  <h3 *ngFor="let task of user.toDoListEntities[0].taskEntities">{{task.title}} - {{task.content}}</h3>-->
+        <div class="text-center"><button type="button" class="btn btn-primary" style="width: 200px" (click)="togglePopup1()">ADD LIST</button></div>
       </div>
     </div>
     <hr class="featurette-divider">
   </div>
   <footer class="container">
-<!--    <p class="float-end"><a href="#">Back to top</a></p>-->
   </footer>
 </main>
 </body></html>

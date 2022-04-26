@@ -6,12 +6,21 @@ import { User } from "./user.model";
   providedIn: 'root'
 })
 export class DataService {
-  apiUrl = 'http://localhost:8080/user/12';
+  apiUrl = 'http://localhost:8080/';
+  user = 'user/12/'
+  addlist = 'list'
 
   constructor(private http: HttpClient) { }
 
   getUser() {
-    console.log("OK");
-    return this.http.get<User[]>(this.apiUrl);
+    return this.http.get<User[]>(this.apiUrl + this.user);
+  }
+
+  PostList(response: any) {
+    this.http.post(this.apiUrl + this.user + this.addlist,{
+      name:response
+    }).toPromise().then((data : any) => {
+    console.log(data)
+    });
   }
 }

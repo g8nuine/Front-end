@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {todolist, User} from "./user.model";
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { User } from "./user.model";
 import {DataService} from "./data.service";
-
 
 @Component({
   selector: 'app-root',
@@ -11,16 +10,15 @@ import {DataService} from "./data.service";
 export class AppComponent implements OnInit{
   user$!: User[];
 
-  constructor(private dataService: DataService) {
-  }
+  constructor(private dataService: DataService, private changeDetection: ChangeDetectorRef) {}
+
   ngOnInit() {
     return this.dataService.getUser()
       .subscribe(data => {
         this.user$ = data;
+        this.changeDetection.detectChanges();
       });
   }
-
-  name:boolean = false;
 
   hideFunction(todolistname: {}){
       const slides = document.getElementsByClassName(''+todolistname);
@@ -33,7 +31,15 @@ export class AppComponent implements OnInit{
           slide.style.display = "none";
         }
       }
-    this.name = !this.name;
+  }
+  togglePopup1() {
+    (document.getElementById('popup1') as HTMLFormElement).classList.toggle("active");
   }
 
+  Addlist() {
+    const {value: data} = (document.getElementById("listInput") as HTMLFormElement)
+    this.dataService.PostList(data);
+    this.changeDetection.detectChanges();
+    this.ngOnInit();
+  }
 }

@@ -4,18 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {DataService} from "./data.service";
-import {MatDialogModule} from '@angular/material/dialog';
-// import { PopUpListComponent } from './';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    MatDialogModule,
-    // PopUpListComponent
+    FormsModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
