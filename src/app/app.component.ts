@@ -13,11 +13,12 @@ export class AppComponent implements OnInit{
   constructor(private dataService: DataService, private changeDetection: ChangeDetectorRef) {}
 
   ngOnInit() {
-    return this.dataService.getUser()
-      .subscribe(data => {
-        this.user$ = data;
-        this.changeDetection.detectChanges();
-      });
+     // this.dataService.getUser()
+     //  .subscribe(data => {
+     //    this.user$ = data;
+     //    this.changeDetection.detectChanges();
+     //  });
+    this.RefreshUsers();
   }
 
   hideFunction(todolistname: {}){
@@ -39,7 +40,13 @@ export class AppComponent implements OnInit{
   Addlist() {
     const {value: data} = (document.getElementById("listInput") as HTMLFormElement)
     this.dataService.PostList(data);
-    this.changeDetection.detectChanges();
-    this.ngOnInit();
+    location.reload();
+  }
+  RefreshUsers() {
+    this.dataService.getUser()
+      .subscribe(data => {
+        this.user$ = data;
+        this.changeDetection.detectChanges();
+      });
   }
 }
