@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from "./user.model";
 import {DataService} from "./data.service";
 
@@ -9,15 +9,16 @@ import {DataService} from "./data.service";
 })
 export class AppComponent implements OnInit{
   user$!: User[];
+  actualListId?: number;
 
-  constructor(private dataService: DataService, private changeDetection: ChangeDetectorRef) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
     this.RefreshUsers();
   }
 
-  hideFunction(todolistname: {}){
-      const slides = document.getElementsByClassName(''+todolistname);
+  hideFunction(todolistid: {}){
+      const slides = document.getElementsByClassName(""+todolistid);
 
       for (let i = 0; i < slides.length; i++) {
         const slide = slides[i] as HTMLElement;
@@ -32,8 +33,9 @@ export class AppComponent implements OnInit{
     (document.getElementById('popup1') as HTMLFormElement).classList.toggle("active");
   }
 
-  togglePopup2() {
+  togglePopup2(listId: number) {
     (document.getElementById('popup2') as HTMLFormElement).classList.toggle("active");
+    this.actualListId = listId;
   }
 
   togglePopup3() {
@@ -41,14 +43,23 @@ export class AppComponent implements OnInit{
   }
 
   AddList() {
-    const {value: data} = (document.getElementById("listInput") as HTMLFormElement)
-    this.dataService.PostList(data);
-    location.reload();
+    const {value: name} = (document.getElementById("listInput") as HTMLFormElement)
+    this.dataService.PostList(name);
+    setTimeout(() => {
+      this.RefreshUsers();
+    }, 100);
   }
 
   AddTask() {
-    //TODO
+    const {value: title} = (document.getElementById("taskInputTitle") as HTMLFormElement)
+    const {value: content} = (document.getElementById("taskInputContent") as HTMLFormElement)
+    console.log(this.actualListId);
+    this.dataService.PostTask(title, content, this.actualListId);
+    setTimeout(() => {
+      this.RefreshUsers();
+    }, 100);
   }
+
 
   AddUser() {
     //TODO
@@ -58,17 +69,33 @@ export class AppComponent implements OnInit{
     this.dataService.getUser()
       .subscribe(data => {
         this.user$ = data;
-        this.changeDetection.detectChanges();
       });
   }
-  CheckStatus(status: boolean) {
-    return {
-      'checked': status,
-      '': !status
+
+  CheckStatus(status: any) {
+    if(status == true) {
+
     }
   }
-  Check(title: any) {
-    const {value: data} = (document.getElementById("" + title) as HTMLFormElement)
-    this.dataService.PostStatus(data);
+  checkBoxInit() {
+
+  }
+  Check(taskid: any, classid: any) {
+    const checkBox = (document.getElementById("" + taskid) as HTMLFormElement);
+    const slides = document.getElementsByClassName(""+classid);
+
+    for (let i = 0; i < slides.length; i++) {
+      const slide = slides[i] as HTMLElement;
+      console.log(taskid)
+      if(checkBox['checked'] == true) {
+        slide.style.textDecoration = "line-through";
+        this.dataService.PostStatus(taskid, true);
+      } else {
+        slide.style.textDecoration = "none";
+        this.dataService.PostStatus(taskid, false);
+      }
+    }
+
+
   }
 }

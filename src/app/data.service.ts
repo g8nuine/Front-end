@@ -8,7 +8,8 @@ import { User } from "./user.model";
 export class DataService {
   apiUrl = 'http://localhost:8080/';
   user = 'user/12/'
-  addlist = 'list'
+  addlist = 'list/'
+  addTask = '/task'
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +24,17 @@ export class DataService {
     console.log(data)
     });
   }
-  PostStatus(response: any) {
+
+  PostTask(title: any, content: any, listId: any) {
+    this.http.post(this.apiUrl + this.addlist + listId + this.addTask, {
+      title: title,
+      content: content
+    }).toPromise().then((data : any) =>{
+      console.log(data)
+    });
+  }
+
+  PostStatus(taskid: any, response: any) {
     //TODO
   }
 }

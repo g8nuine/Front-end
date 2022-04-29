@@ -1,3 +1,10 @@
+.userList {
+  width: 100%;
+  float: left;
+}
+.userButtons {
+  float: right;
+}
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
