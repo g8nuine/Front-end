@@ -10,6 +10,7 @@ export class DataService {
   user = 'user/12/'
   addlist = 'list/'
   addTask = '/task'
+  editTask = 'task/'
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +22,7 @@ export class DataService {
     this.http.post(this.apiUrl + this.user + this.addlist,{
       name:response
     }).toPromise().then((data : any) => {
-    console.log(data)
+    console.log(data);
     });
   }
 
@@ -30,11 +31,17 @@ export class DataService {
       title: title,
       content: content
     }).toPromise().then((data : any) =>{
-      console.log(data)
+      console.log(data);
     });
   }
 
-  PostStatus(taskid: any, response: any) {
-    //TODO
+  PostStatus(taskid: any, tasktitle: any, taskcontent: any,  response: any) {
+    this.http.put(this.apiUrl + this.editTask + taskid, {
+      title: tasktitle,
+      content: taskcontent,
+      status: response
+    }).toPromise().then((data: any) =>{
+      console.log(taskid);
+    });
   }
 }

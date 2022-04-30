@@ -72,30 +72,28 @@ export class AppComponent implements OnInit{
       });
   }
 
-  CheckStatus(status: any) {
-    if(status == true) {
-
+  CheckIni(status: any) {
+    return {
+      checked: status == true,
+      unchecked: status == false
     }
   }
-  checkBoxInit() {
 
-  }
-  Check(taskid: any, classid: any) {
+
+  Check(taskid: any, classid: any, taskt: any, taskc: any) {
     const checkBox = (document.getElementById("" + taskid) as HTMLFormElement);
     const slides = document.getElementsByClassName(""+classid);
 
     for (let i = 0; i < slides.length; i++) {
       const slide = slides[i] as HTMLElement;
-      console.log(taskid)
       if(checkBox['checked'] == true) {
         slide.style.textDecoration = "line-through";
-        this.dataService.PostStatus(taskid, true);
+        this.dataService.PostStatus(taskid, taskt, taskc, true);
       } else {
         slide.style.textDecoration = "none";
-        this.dataService.PostStatus(taskid, false);
+        this.dataService.PostStatus(taskid, taskt, taskc, false);
       }
     }
-
-
   }
+
 }
