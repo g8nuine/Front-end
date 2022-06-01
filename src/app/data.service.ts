@@ -8,7 +8,7 @@ import { User } from "./user.model";
 export class DataService {
   apiUrl = 'http://localhost:8080/';
   user = 'user/12/'
-  addlist = 'list/'
+  list = 'list/'
   addTask = '/task'
   editTask = 'task/'
 
@@ -19,7 +19,7 @@ export class DataService {
   }
 
   PostList(response: any) {
-    this.http.post(this.apiUrl + this.user + this.addlist,{
+    this.http.post(this.apiUrl + this.user + this.list,{
       name:response
     }).toPromise().then((data : any) => {
     console.log(data);
@@ -27,7 +27,7 @@ export class DataService {
   }
 
   PostTask(title: any, content: any, listId: any) {
-    this.http.post(this.apiUrl + this.addlist + listId + this.addTask, {
+    this.http.post(this.apiUrl + this.list + listId + this.addTask, {
       title: title,
       content: content
     }).toPromise().then((data : any) =>{
@@ -42,6 +42,20 @@ export class DataService {
       status: response
     }).toPromise().then((data: any) =>{
       console.log(taskid);
+    });
+  }
+
+  DeleteList(listId: number) {
+    this.http.delete( this.apiUrl + this.user +  this.list + listId,{
+    }).toPromise().then((data : any) => {
+      console.log(data);
+    });
+  }
+
+  DeleteTask(listId: number, taskId: number) {
+    this.http.delete( "http://localhost:8080/list/" + listId + "/" + "task/" + taskId,{
+    }).toPromise().then((data : any) => {
+      console.log(data);
     });
   }
 }

@@ -15,10 +15,28 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.RefreshUsers();
+    // setTimeout(() => {
+    //   this.hideInit();
+    // }, 100);
   }
 
-  hideFunction(todolistid: {}){
-      const slides = document.getElementsByClassName(""+todolistid);
+  hideInit() {
+    const slides = document.getElementsByClassName("hideInit");
+
+    for (let i = 0; i < slides.length; i++) {
+      const slide = slides[i] as HTMLElement;
+      slide.style.display = "none"
+      // if(slide.style.display == "none") {
+      //   slide.style.display = "block";
+      // } else {
+      //   slide.style.display = "none";
+      // }
+    }
+  }
+
+
+  hideFunction(todolistid: string){
+      const slides = document.getElementsByClassName("" + todolistid);
 
       for (let i = 0; i < slides.length; i++) {
         const slide = slides[i] as HTMLElement;
@@ -29,6 +47,7 @@ export class AppComponent implements OnInit{
         }
       }
   }
+
   togglePopup1() {
     (document.getElementById('popup1') as HTMLFormElement).classList.toggle("active");
   }
@@ -53,7 +72,7 @@ export class AppComponent implements OnInit{
   AddTask() {
     const {value: title} = (document.getElementById("taskInputTitle") as HTMLFormElement)
     const {value: content} = (document.getElementById("taskInputContent") as HTMLFormElement)
-    console.log(this.actualListId);
+    // console.log(this.actualListId);
     this.dataService.PostTask(title, content, this.actualListId);
     setTimeout(() => {
       this.RefreshUsers();
@@ -65,11 +84,26 @@ export class AppComponent implements OnInit{
     //TODO
   }
 
+  DeleteList(listId: number) {
+    this.dataService.DeleteList(listId);
+    setTimeout(() => {
+      this.RefreshUsers();
+    }, 100);
+  }
+
+  DeleteTask(listId: number, taskId: number) {
+    this.dataService.DeleteTask(listId, taskId);
+    setTimeout(() => {
+      this.RefreshUsers();
+    }, 100);
+  }
+
   RefreshUsers() {
     this.dataService.getUser()
       .subscribe(data => {
         this.user$ = data;
       });
+
   }
 
   CheckIni(status: any) {

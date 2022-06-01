@@ -73,7 +73,3 @@
 .checked {
   text-decoration: line-through;
 }
-.btn-danger {
-  position: static;
-  float: right;
-}
