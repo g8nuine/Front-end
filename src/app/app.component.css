@@ -1,0 +1,75 @@
+.userList {
+  width: 100%;
+  float: left;
+}
+.userButtons {
+  float: right;
+}
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+.popup .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  z-index: 1;
+  display: none;
+}
+.popup .content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background:#fff;
+  width: 450px;
+  height: 220px;
+  z-index: 2;
+  text-align:center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.popup .content input {
+  border-radius: 2px;
+}
+.popup .close-btn {
+  cursor: pointer;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  background: #222;
+  color: #fff;
+  font-size: 25px;
+  font-weight:600;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.popup.active .overlay {
+  display: block;
+}
+
+.popup.active .content {
+  transition:all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale(1);
+}
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+.unchecked {
+
+}
+.checked {
+  text-decoration: line-through;
+}
